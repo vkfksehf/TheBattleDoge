@@ -77,7 +77,6 @@
     <Compile Include="Assets\Scripts\charPowUp\charPowUp_IconBehaviour.cs" />
     <Compile Include="Assets\Scripts\charSettingScene\charIconMove.cs" />
     <Compile Include="Assets\Scripts\charSettingScene\charSettingManager.cs" />
-    <Compile Include="Assets\Scripts\fightStage\cameraMove.cs" />
     <Compile Include="Assets\Scripts\fightStage\characterMove.cs" />
     <Compile Include="Assets\Scripts\fightStage\fightManager.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

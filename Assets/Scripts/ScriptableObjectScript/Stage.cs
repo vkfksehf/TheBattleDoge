@@ -12,12 +12,6 @@ public class Stage : ScriptableObject
     public int stageLength;
     public int StageLength { get { return stageLength; } }
     [SerializeField]
-    public stageChar[] stageCharList;
-    public stageChar[] StageCharList { get { return stageCharList; } }
-}
-
-[System.Serializable]
-public class stageChar
-{
-    public int[] charStat;
+    public Status[] stageCharList;
+    public Status[] StageCharList { get { return stageCharList; } }
 }
