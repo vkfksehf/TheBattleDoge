@@ -15,13 +15,13 @@ MonoBehaviour:
   stageNumber: 0
   stageLength: 100
   stageCharList:
-  - charStat: 
-  - charStat: 
-  - charStat: 
-  - charStat: 
-  - charStat: 
-  - charStat: 
-  - charStat: 
-  - charStat: 
-  - charStat: 
-  - charStat: 
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
+  - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}

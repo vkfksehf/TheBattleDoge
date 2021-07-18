@@ -13,6 +13,8 @@ public class dataBase : MonoBehaviour
 
     public int selectedStageNumber;
 
+    public string[] stageNames;
+
     public string[] encoding;
     public Dictionary<string, int> decoding;
     public List<Dictionary<string, string>> alphabets;
@@ -21,6 +23,13 @@ public class dataBase : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(GameObject.Find("DataSaver"));
+
+        stageNames = new string[] {"제주도", "전라남도", "광주 광역시",
+            "경상남도", "부산 광역시", "울산 광역시",
+            "대구 광역시", "전라북도", "충청남도",
+            "대전 광역시", "충청북도", "경상북도",
+            "울릉도", "독도", "강원도",
+            "경기도", "인천 광역시", "서울 특별시"};
 
         alphabets = new List<Dictionary<string, string>>();
         string[] var3 = new string[20] { "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", ")", "!", "@", "#", "$", "%", "^", "&", "*", "(" };
