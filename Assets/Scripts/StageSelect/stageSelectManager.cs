@@ -49,14 +49,9 @@ public class stageSelectManager : MonoBehaviour
         texts[1].text = dogeFeed.ToString();
         texts[2].text = rainbowFruit.ToString();
 
-        stageNames = new string[] {"제주도", "전라남도", "광주 광역시",  
-            "경상남도", "부산 광역시", "울산 광역시", 
-            "대구 광역시", "전라북도", "충청남도",
-            "대전 광역시", "충청북도", "경상북도",
-            "울릉도", "독도", "강원도",
-            "경기도", "인천 광역시", "서울 특별시"};
+        stageNames = saveData.stageNames;
 
-        if (clearStageAmount == 18)//utmost stageNumber
+        if (clearStageAmount == stageNames.Length)
         {
             selectedStageNumber = clearStageAmount - 1;
         }
