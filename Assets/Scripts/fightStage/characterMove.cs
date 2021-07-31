@@ -49,9 +49,4 @@ public class characterMove : MonoBehaviour
             
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }
 }

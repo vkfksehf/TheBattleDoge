@@ -29,6 +29,8 @@ public class fightManager : MonoBehaviour
     //money0, left1, right2, stageName3, OCH4, ECH5
     //WRFC6, PRFC7
 
+    List<Character> entity;
+
     public List<int[]> charList;
     public List<int[]> charStat;
     public List<int[]> charAddAbility;
@@ -41,6 +43,8 @@ public class fightManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        entity = new List<Character>();
+
         dataBase saveData = GameObject.Find("DataSaver").GetComponent<dataBase>();
 
         charList = saveData.teamList;
@@ -61,12 +65,12 @@ public class fightManager : MonoBehaviour
             });
             /*
             체력0, 공격력1, 속도2, 객체공격범위3~4,
-            성공격범위5, 공격쿨탐6, 선딜7, 베리어8, 가격9, 재생산10
+            성.공격범위5, 공격쿨탐6, 선딜7, 가격8, 재생산9, 베리어10
 
-            숨기횟수12, 숨을시간13, 소생횟수14, 소생체력15, 소생대기시간16, 
-            워프거리17, 워프확률18, 속성초뎀19, 속성맷집20, 파동레벨21,
-            파동확률22, 열파레벨23, 열파확률24, 밀치기확률25, 크리확률26, 
-            생존확률27, 생존횟수28, 공증가량29, 공증가발동체력30
+            숨기횟수0, 숨을시간1, 소생횟수2, 소생체력3, 소생대기시간4, 
+            워프거리5, 워프확률6, 속성초뎀7, 속성맷집8, 파동레벨9,
+            파동확률10, 열파레벨11, 열파확률12, 밀치기확률13, 크리확률14, 
+            생존확률15, 생존횟수16, 공증가량17, 공증가발동체력18
             */
             charAddAbility.Add(stat.addAbility);
             GameObject.Find("icon ("+i.ToString()+")").GetComponent<Image>().sprite = Resources.Load<Sprite>("char/" + charList[i][0].ToString() + "/si");
@@ -122,7 +126,7 @@ public class fightManager : MonoBehaviour
 
         colors = new Color[2]
         {
-            new Color(255, 255, 255), new Color(126, 126, 126)
+            new Color(126, 126, 126), new Color(255, 255, 255)
         };
         IsAbleReinforce = new int[2]
         {
@@ -154,6 +158,99 @@ public class fightManager : MonoBehaviour
                 }
             }
         }
+        if (entity.Count > 0)
+        {
+            int delete = 0;
+            for (int i = 0; i < entity.Count; i++)
+            {
+                Character e = entity[i - delete];
+                if (e.hp > 0)
+                {
+                    if (e.motion <= 1)
+                    {
+                        //공격 판정
+                        bool IsTarget = false;
+                        for (int j = 0; j < entity.Count; j++)
+                        {
+                            if (!IsTarget)
+                            {
+                                if (e.tag + entity[j].tag == 1)
+                                {
+                                    if ((e.tag == 1 && e.tr.position.x + e.e_range[0] <= entity[j].tr.position.x && entity[j].tr.position.x <= e.tr.position.x + e.e_range[1]) || (e.tag == 0 && e.tr.position.x - e.e_range[1] <= entity[j].tr.position.x && entity[j].tr.position.x <= e.tr.position.x - e.e_range[0]))
+                                    {
+                                        IsTarget = true;
+                                    }
+                                }
+                            }
+                        }
+                        if (!IsTarget)
+                        {
+                            if ((e.tag == 1 && e.tr.position.x + e.e_range[0] <= 5 && 5 <= e.tr.position.x + e.e_range[1]) || (e.tag == 0 && e.tr.position.x - e.e_range[1] <= 5 - stageLength && 5 - stageLength <= e.tr.position.x - e.e_range[0]))
+                            {
+                                IsTarget = true;
+                            }
+                        }
+                        if (e.motion == 0) //wait
+                        {
+                            if (!IsTarget)
+                            {
+                                e.anim.SetInteger("type", 1);
+                                e.motion = 1;
+                            }
+                            else if (e.time >= e.atkCoolTime)
+                            {
+                                e.anim.SetInteger("type", 2);
+                                e.motion = 2;
+                                e.time = 0;
+                            }
+                            e.time += Time.deltaTime;
+                        }
+                        else if (e.motion == 1) //move
+                        {
+                            e.tr.position += Vector3.right * (2 * e.tag - 1) * e.spd;
+                        }
+                    }
+                    else if (e.motion == 2) //attack
+                    {
+                        if (e.time >= e.delayTime)
+                        {
+                            bool IsTarget = false;
+                            for (int j = 0; j < entity.Count; j++)
+                            {
+                                if (!IsTarget)
+                                {
+                                    if (e.tag + entity[j].tag == 1)
+                                    {
+                                        if ((e.tag == 1 && e.tr.position.x + e.e_range[0] <= entity[j].tr.position.x && entity[j].tr.position.x <= e.tr.position.x + e.e_range[1]) || (e.tag == 0 && e.tr.position.x - e.e_range[1] <= entity[j].tr.position.x && entity[j].tr.position.x <= e.tr.position.x - e.e_range[0]))
+                                        {
+                                            entity[j].hp -= e.atk;
+                                            if (e.IsObj)
+                                            {
+                                                IsTarget = true;
+                                            }
+                                        }
+                                    }
+                                    if (!IsTarget)
+                                    {
+                                        if ((e.tag == 1 && e.tr.position.x + e.e_range[0] <= 5 && 5 <= e.tr.position.x + e.e_range[1]) || (e.tag == 0 && e.tr.position.x - e.e_range[1] <= 5 - stageLength && 5 - stageLength <= e.tr.position.x - e.e_range[0]))
+                                        {
+                                            CH[2 - 2 * e.tag] -= e.atk;
+                                        }
+                                    }
+                                }
+                            }
+                            e.motion = 0;
+                            e.time = 0;
+                        }
+                        e.time += Time.deltaTime;
+                    }
+                }
+                else
+                {
+
+                }
+            }
+        }
         if (camAcceleration != 0)
         {
             if (camTr.position.x + camAcceleration * Time.deltaTime > 0)
@@ -170,21 +267,21 @@ public class fightManager : MonoBehaviour
             }
             camAcceleration -= 0.5f * Mathf.Abs(camAcceleration) / camAcceleration;
         }
-        if (CH[0].ToString() != textUI[4].text)
+        if (CH[0].ToString() + "/" + CH[1].ToString() != textUI[4].text)
         {
-            textUI[4].text = CH[0].ToString();
+            textUI[4].text = CH[0].ToString() + "/" + CH[1].ToString();
         }
-        if (CH[1].ToString() != textUI[5].text)
+        if (CH[2].ToString() + "/" + CH[3].ToString() != textUI[5].text)
         {
-            textUI[5].text = CH[2].ToString();
+            textUI[5].text = CH[2].ToString() + "/" + CH[3].ToString();
         }
-        if (money < reinforceLevel[0] * 1000 + 2500)
+        if (money < reinforceLevel[0] * 2000 + 2500)
         {
             money += 25 * reinforceLevel[0] * Time.deltaTime;
         }
         else
         {
-            money = reinforceLevel[0] * 1000 + 2500;
+            money = reinforceLevel[0] * 2000 + 2500;
         }
         for (int i = 0; i < 2; i++)
         {
@@ -227,4 +324,25 @@ public class fightManager : MonoBehaviour
             textUI[var + 6].text = (reinforceLevel[var] * 200 * (var + 1) + 500 / (var + 1)).ToString();
         }
     }
+}
+
+public class Character
+{
+    public GameObject self;
+    public Transform tr;
+    public Animator anim;
+    public float[] e_range;
+    public int[] addAbility;
+    public float spd;
+    public float time;
+    public float atkCoolTime;
+    public float delayTime;
+    public float c_range;
+    public int motion;
+    //0wait, 1move, 2attack, 3knockback, 4die, 5burrow, 6emerge
+    public int tag;
+    public int hp;
+    public int atk;
+    public int barrier;
+    public bool IsObj;
 }
