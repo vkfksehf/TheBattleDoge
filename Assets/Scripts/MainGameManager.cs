@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour
 {
+    public GameObject notInteraction;
+
     public Animator[] animators;
 
     public AudioClip[] audioClips;
@@ -102,6 +104,8 @@ public class MainGameManager : MonoBehaviour
         {
             if (turnRequire[var])
             {
+                notInteraction.SetActive(true);
+
                 audioSource.clip = audioClips[1];
                 audioSource.Play();
                 t = 0;
@@ -116,6 +120,8 @@ public class MainGameManager : MonoBehaviour
         }
         else
         {
+            notInteraction.SetActive(true);
+
             audioSource.clip = audioClips[1];
             audioSource.Play();
             t = 0;

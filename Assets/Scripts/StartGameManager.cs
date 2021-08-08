@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class StartGameManager : MonoBehaviour
 {
+    public GameObject notInteraction;
+
     public AudioClip[] audioClips;
     private AudioSource audioSource;
     private Animator animator;
@@ -36,6 +38,8 @@ public class StartGameManager : MonoBehaviour
 
     public void IsButtonClicked(int var)
     {
+        notInteraction.SetActive(true);
+
         audioSource.clip = audioClips[1];
         audioSource.Play();
 

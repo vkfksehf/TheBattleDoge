@@ -34,6 +34,12 @@ public class Status : ScriptableObject
     public int barrier = 0;
     public int Barrier { get { return barrier; } }
     [SerializeField]
+    public int hitback = 0;
+    public int Hitback { get { return hitback; } }
+    [SerializeField]
+    public int isObjInt = 0;
+    public int IsObjInt { get { return isObjInt; } }
+    [SerializeField]
     public int[] addAbility = new int[19];
     /*
     숨기횟수0, 숨을시간1, 소생횟수2, 소생체력3, 소생대기시간4, 워프거리5,

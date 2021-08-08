@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 0
   m_EditorClassIdentifier: 
   stageNumber: 0
-  stageLength: 100
+  stageLength: 10
   stageCharList:
   - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
   - {fileID: 11400000, guid: 4476ebcf3e8486342a114269b8ac3653, type: 2}
